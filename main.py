@@ -12,11 +12,11 @@ DEFAULT_FILENAME = "words.txt"
 DEFAULT_DUPLICATES = False
 
 
-def sort_list(items, ascending=True):
+def sort_list(items, ascending):
     if not isinstance(items, list):
         raise RuntimeError(f"No puede ordenar {type(items)}")
 
-    return sorted(items, reverse=(not ascending))
+    return sorted(items, reverse=(ascending))
 
 
 def remove_duplicates_from_list(items):
@@ -63,9 +63,17 @@ if __name__ == "__main__":
         print(f"El fichero {filename} no existe")
         word_list = ["ravenclaw", "gryffindor", "slytherin", "hufflepuff"]
 
-    if remove_duplicates:
-        word_list = remove_duplicates_from_list(word_list)
-        word_list_translated= translate_words(word_list)
-    print(sort_list(word_list_translated))
-    
-## Haicendo pruebas para subir un commit
+    respuesta = input("Desea ordenar el texto ascendente o descenten: ")
+    if respuesta == "ascendente":
+        if remove_duplicates:
+            ascending=True
+            word_list = remove_duplicates_from_list(word_list)
+            word_list_translated= translate_words(word_list)
+        print(sort_list(word_list_translated,ascending))
+    else:
+        if remove_duplicates:
+            ascending=False
+            word_list = remove_duplicates_from_list(word_list)
+            word_list_translated= translate_words(word_list)
+        print(sort_list(word_list_translated,ascending))
+
